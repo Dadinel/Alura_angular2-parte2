@@ -18,15 +18,30 @@ var FotoService = (function () {
         this.headers.append('Content-Type', 'application/json');
     }
     FotoService.prototype.cadastra = function (foto) {
-        return this.http
-            .post(this.url, JSON.stringify(foto), { headers: this.headers });
+        if (foto._id) {
+            return this.http
+                .put(this.url + '/' + foto._id, JSON.stringify(foto), { headers: this.headers })
+                .map(function () { return new MensagemCadastro('Foto alterada com sucesso', false); });
+        }
+        else {
+            return this.http
+                .post(this.url, JSON.stringify(foto), { headers: this.headers })
+                .map(function () { return new MensagemCadastro('Foto incluída com sucesso', true); });
+        }
     };
     FotoService.prototype.lista = function () {
-        return this.http.get(this.url)
+        return this.http
+            .get(this.url)
             .map(function (res) { return res.json(); });
     };
     FotoService.prototype.remove = function (foto) {
-        return this.http.delete(this.url + '/' + foto._id);
+        return this.http
+            .delete(this.url + '/' + foto._id);
+    };
+    FotoService.prototype.buscaPorId = function (id) {
+        return this.http
+            .get(this.url + '/' + id)
+            .map(function (res) { return res.json(); });
     };
     FotoService = __decorate([
         core_1.Injectable(), 
@@ -35,4 +50,37 @@ var FotoService = (function () {
     return FotoService;
 }());
 exports.FotoService = FotoService;
+var MensagemCadastro = (function () {
+    /*private _mensagem: string;
+    private _inclusao: boolean;*/
+    function MensagemCadastro(_mensagem, _inclusao) {
+        this._mensagem = _mensagem;
+        this._inclusao = _inclusao;
+        this._mensagem = _mensagem;
+        this._inclusao = _inclusao;
+    }
+    Object.defineProperty(MensagemCadastro.prototype, "mensagem", {
+        /*public obterMensagem(): string {
+            return this._mensagem;
+        }
+    
+        public ehInclusao(): boolean {
+            return this._inclusao;
+        }*/
+        get: function () {
+            return this._mensagem;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MensagemCadastro.prototype, "inclusao", {
+        get: function () {
+            return this._inclusao;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return MensagemCadastro;
+}());
+exports.MensagemCadastro = MensagemCadastro;
 //# sourceMappingURL=foto.service.js.map

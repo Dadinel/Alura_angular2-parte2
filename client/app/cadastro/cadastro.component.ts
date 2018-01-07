@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FotoComponent } from '../foto/foto.component';
 //import { Http, Headers } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -14,12 +15,29 @@ export class CadastroComponent {
     service: FotoService;
     foto: FotoComponent = new FotoComponent();
     meuForm: FormGroup;
+    route: ActivatedRoute;
+    router: Router;
+    mensagem: string = '';
     //http: Http;
 
-    constructor(/*http: Http, */ service: FotoService, fb: FormBuilder) {
+    constructor(/*http: Http, */ service: FotoService, fb: FormBuilder, route: ActivatedRoute, router: Router) {
 
         //this.http = http;
         this.service = service;
+        this.route = route;
+        this.router = router;
+
+        this.route.params.subscribe(params => {
+            let id = params['id'];
+
+            if(id) {
+                this.service
+                .buscaPorId(id)
+                .subscribe( foto => this.foto = foto
+                          , erro => console.log(erro)
+                );
+            }
+        });
         
         this.meuForm = fb.group({
             titulo: ['', Validators.compose(
@@ -48,7 +66,11 @@ export class CadastroComponent {
             });*/
         this.service
             .cadastra(this.foto)
-            .subscribe( () => this.foto = new FotoComponent()
+            .subscribe( (res) => {
+                        this.mensagem = res.mensagem;
+                        this.foto = new FotoComponent();
+                        if(!res.inclusao) this.router.navigate(['']);
+                        }
                       , erro => console.log(erro)
             );
     }
