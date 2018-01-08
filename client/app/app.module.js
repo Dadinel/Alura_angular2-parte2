@@ -11,13 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 require('rxjs/add/operator/map');
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var http_1 = require('@angular/http');
+var app_routes_1 = require('./app.routes');
 var app_component_1 = require('./app.component');
 var listagem_component_1 = require('./listagem/listagem.component');
 var cadastro_component_1 = require('./cadastro/cadastro.component');
-var http_1 = require('@angular/http');
 var foto_module_1 = require('./foto/foto.module');
 var painel_module_1 = require('./painel/painel.module');
-var app_routes_1 = require('./app.routes');
+var botao_module_1 = require('./botao/botao.module');
 var forms_1 = require('@angular/forms');
 var AppModule = (function () {
     function AppModule() {
@@ -29,6 +30,7 @@ var AppModule = (function () {
                 http_1.HttpModule,
                 painel_module_1.PainelModule,
                 foto_module_1.FotoModule,
+                botao_module_1.BotaoModule,
                 app_routes_1.routing,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule
