@@ -10,6 +10,7 @@ import { CadastroComponent }   from './cadastro/cadastro.component';
 import { FotoModule } from './foto/foto.module';
 import { PainelModule } from './painel/painel.module';
 import { BotaoModule } from './botao/botao.module';
+import { ModalModule } from './modal/modal.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PainelModule, 
     FotoModule,
     BotaoModule,
+    ModalModule,
     routing,
     FormsModule,
     ReactiveFormsModule

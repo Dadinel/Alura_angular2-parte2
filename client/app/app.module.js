@@ -19,6 +19,7 @@ var cadastro_component_1 = require('./cadastro/cadastro.component');
 var foto_module_1 = require('./foto/foto.module');
 var painel_module_1 = require('./painel/painel.module');
 var botao_module_1 = require('./botao/botao.module');
+var modal_module_1 = require('./modal/modal.module');
 var forms_1 = require('@angular/forms');
 var AppModule = (function () {
     function AppModule() {
@@ -31,6 +32,7 @@ var AppModule = (function () {
                 painel_module_1.PainelModule,
                 foto_module_1.FotoModule,
                 botao_module_1.BotaoModule,
+                modal_module_1.ModalModule,
                 app_routes_1.routing,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule
